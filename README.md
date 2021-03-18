@@ -437,7 +437,7 @@ Para isso, escreva no arquivo `desafio17.js` duas queries, **nesta ordem**:
 
 1. Crie uma query que faça a criação de um índice do tipo `text` no campo `descricao` com o idioma padrão `portuguese`.
 
-2. Crie uma query que retorne a quantidade de documentos que contêm as palavras `frango` e `hamburguer` utilizando o operador `$text`.
+2. Crie uma query que retorne a quantidade de documentos que contêm as palavras `frango` ou `hamburguer` utilizando o operador `$text`.
 
 ##### Desafio 18
 
