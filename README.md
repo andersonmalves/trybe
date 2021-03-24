@@ -383,7 +383,7 @@ O resultado da sua query deve ter o seguinte formato:
 
 - Guarde essa informação, você precisará dela mais tarde.
 
-- Não considere documentos com valores vazios (`""`) ou em que o campo não existe!
+- Não considere documentos com valores vazios (`""`) e em que o campo não existe!
 
 - Para este desafio utilize o operador [`$toInt`](https://docs.mongodb.com/manual/reference/operator/aggregation/toInt/index.html) para converter de string para valor inteiro.
 
