@@ -6,6 +6,8 @@ const app = express();
 app.use(bodyParser.json());
 
 const SUCCESS = 200;
+// const BAD_REQUEST = 400;
+// const UNAUTHORIZED = 401;
 const NOT_FOUND = 404;
 const PORT = '3000';
 
@@ -26,6 +28,10 @@ app.get('/crush/:id', async (_request, response) => {
     return response.status(NOT_FOUND).send({ message: 'Crush não encontrado' });
   }
   response.status(SUCCESS).send(result);
+});
+
+app.post('/login', (_request, response) => {
+  response.send('hello world');
 });
 
 // não remova esse endpoint, e para o avaliador funcionar
