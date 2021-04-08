@@ -105,7 +105,6 @@ app.post('/crush', async (request, response) => {
     const data = await readCrush();
     const newCrush = { id: data.length + 1, name, age, date };
     response.status(CREATED).send(newCrush);
-
   } catch (error) {
     response.status(BAD_REQUEST).json({ message: error.message });
   }
