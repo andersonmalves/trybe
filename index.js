@@ -126,7 +126,7 @@ app.put('/crush/:id', (request, response) => {
     checkDate(date);
     checkDatedAt(date.datedAt);
     checkRate(date.rate);
-    const editedCrush = { id: parseInt(id), name, age, date };
+    const editedCrush = { id: parseInt(id, 10), name, age, date };
     response.status(SUCCESS).send(editedCrush);
   } catch (error) {
     response.status(BAD_REQUEST).json({ message: error.message });
