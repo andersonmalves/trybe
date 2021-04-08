@@ -119,7 +119,6 @@ app.put('/crush/:id', (request, response) => {
   const { name, age, date } = request.body;
   const { id } = request.params;
 
-  console.log(id);
   try {
     checkName(name);
     checkAge(age);
