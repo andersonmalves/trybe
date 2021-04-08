@@ -36,7 +36,9 @@ app.get('/crush', async (_request, response) => {
   response.status(SUCCESS).send(data);
 });
 
-app.get('/crush/:id', async (request, response) => {
+const crushId = '/crush/:id';
+
+app.get(crushId, async (request, response) => {
   const data = await readCrush();
   const result = data.find((el) => el.id === parseInt(request.params.id, 10));
   if (result === undefined) { 
@@ -125,7 +127,7 @@ app.post('/crush', async (request, response) => {
   }
 });
 
-app.put('/crush/:id', (request, response) => {
+app.put(crushId, (request, response) => {
   const { name, age, date } = request.body;
   const { id } = request.params;
 
@@ -143,7 +145,7 @@ app.put('/crush/:id', (request, response) => {
   }
 });
 
-app.delete('/crush/:id', (request, response) => {
+app.delete(crushId, (request, response) => {
   response.status(SUCCESS).send({ message: 'Crush deletado com sucesso' });
 });
 
