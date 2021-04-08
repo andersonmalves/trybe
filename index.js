@@ -24,10 +24,12 @@ async function readCrush() {
   return JSON.parse(data);
 }
 
-async function writeCrush(crush) {
-  await fs.writeFile('./crush.json', crush, 'utf-8');
-  return true;
-}
+/*
+  async function writeCrush(crush) {
+    await fs.writeFile('./crush.json', crush, 'utf-8');
+    return true;
+  }
+*/
 
 app.get('/crush', async (_request, response) => {
   const data = await readCrush();
@@ -97,7 +99,7 @@ function checkDatedAt(datedAt) {
 }
 
 function checkRate(rate) {
-  if (!Number.isInteger(rate) || rate < 1 || rate > 5) {// não remova esse endpoint, e para o avaliador funcionar
+  if (!Number.isInteger(rate) || rate < 1 || rate > 5) { // não remova esse endpoint, e para o avaliador funcionar
     app.get('/', (_request, response) => {
       response.status(SUCCESS).send();
     });
