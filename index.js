@@ -143,4 +143,8 @@ app.put('/crush/:id', (request, response) => {
   }
 });
 
+app.delete('/crush/:id', (request, response) => {
+  response.status(SUCCESS).send({ message: 'Crush deletado com sucesso' });
+});
+
 app.listen(PORT, () => { console.log('Online'); });
