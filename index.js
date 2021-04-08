@@ -24,6 +24,11 @@ async function readCrush() {
   return JSON.parse(data);
 }
 
+async function writeCrush(crush) {
+  await fs.writeFile('./crush.json', crush, 'utf-8');
+  return true;
+}
+
 app.get('/crush', async (_request, response) => {
   const data = await readCrush();
   response.status(SUCCESS).send(data);
@@ -92,7 +97,10 @@ function checkDatedAt(datedAt) {
 }
 
 function checkRate(rate) {
-  if (!Number.isInteger(rate) || rate < 1 || rate > 5) {
+  if (!Number.isInteger(rate) || rate < 1 || rate > 5) {// não remova esse endpoint, e para o avaliador funcionar
+    app.get('/', (_request, response) => {
+      response.status(SUCCESS).send();
+    });
     throw new Error('O campo "rate" deve ser um inteiro de 1 à 5');
   }
 }
