@@ -14,6 +14,11 @@ const BAD_REQUEST = 400;
 const NOT_FOUND = 404;
 const PORT = '3000';
 
+// não remova esse endpoint, e para o avaliador funcionar
+app.get('/', (_request, response) => {
+  response.status(SUCCESS).send();
+});
+
 async function readCrush() {
   const data = await fs.readFile('./crush.json');
   return JSON.parse(data);
@@ -110,9 +115,22 @@ app.post('/crush', async (request, response) => {
   }
 });
 
-// não remova esse endpoint, e para o avaliador funcionar
-app.get('/', (_request, response) => {
-  response.status(SUCCESS).send();
+app.put('/crush/:id', (request, response) => {
+  const { name, age, date } = request.body;
+  const { id } = request.params;
+
+  console.log(id);
+  try {
+    checkName(name);
+    checkAge(age);
+    checkDate(date);
+    checkDatedAt(date.datedAt);
+    checkRate(date.rate);
+    const editedCrush = { id: parseInt(id), name, age, date };
+    response.status(SUCCESS).send(editedCrush);
+  } catch (error) {
+    response.status(BAD_REQUEST).json({ message: error.message });
+  }
 });
 
 app.listen(PORT, () => { console.log('Online'); });
