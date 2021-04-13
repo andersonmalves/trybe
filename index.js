@@ -28,6 +28,18 @@ async function writeCrush(crush) {
   await fs.writeFile('./crush.json', crush, 'utf-8');
 }
 
+app.get('/crush/search', checkToken, async (request, response) => {
+  const { q } = request.query;
+
+  try {
+    const data = await readCrush();
+    const result = data.filter((el) => el.name.includes(q));
+    response.status(SUCCESS).json(result);
+  } catch (error) {
+    response.status(BAD_REQUEST).json({ message: error.message });
+  }
+});
+
 app.get('/crush', async (_request, response) => {
   const data = await readCrush();
   response.status(SUCCESS).send(data);
