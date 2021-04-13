@@ -24,12 +24,9 @@ async function readCrush() {
   return JSON.parse(data);
 }
 
-/*
-  async function writeCrush(crush) {
-    await fs.writeFile('./crush.json', crush, 'utf-8');
-    return true;
-  }
-*/
+async function writeCrush(crush) {
+  await fs.writeFile('./crush.json', crush, 'utf-8');
+}
 
 app.get('/crush', async (_request, response) => {
   const data = await readCrush();
@@ -121,13 +118,15 @@ app.post('/crush', async (request, response) => {
 
     const data = await readCrush();
     const newCrush = { id: data.length + 1, name, age, date };
+    const newData = [...data, newCrush];
+    await writeCrush(JSON.stringify(newData, 0, 2));
     response.status(CREATED).send(newCrush);
   } catch (error) {
     response.status(BAD_REQUEST).json({ message: error.message });
   }
 });
 
-app.put(crushId, (request, response) => {
+app.put(crushId, async (request, response) => {
   const { name, age, date } = request.body;
   const { id } = request.params;
 
@@ -138,14 +137,21 @@ app.put(crushId, (request, response) => {
     checkDatedAt(date.datedAt);
     checkRate(date.rate);
     const editedCrush = { id: parseInt(id, 10), name, age, date };
-
+    const data = await readCrush();
+    const newData = data.filter((item) => item.id !== parseInt(id, 10));
+    const newEditedData = [...newData, editedCrush];
+    await writeCrush(JSON.stringify(newEditedData, 0, 2));
     response.status(SUCCESS).send(editedCrush);
   } catch (error) {
     response.status(BAD_REQUEST).json({ message: error.message });
   }
 });
 
-app.delete(crushId, (request, response) => {
+app.delete(crushId, async (request, response) => {
+  const { id } = request.params;
+  const data = await readCrush();
+  const newData = data.filter((item) => item.id !== parseInt(id, 10));
+  await writeCrush(JSON.stringify(newData, 0, 2));
   response.status(SUCCESS).send({ message: 'Crush deletado com sucesso' });
 });
 
