@@ -5,7 +5,7 @@ db.movies.aggregate([
         $gte: 7,
       },
       genres: {
-        $not: { 
+        $not: {
           $in: ["Crime", "Horror"],
         },
       },
