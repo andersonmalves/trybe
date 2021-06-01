@@ -18,6 +18,23 @@ const createUser = async (newUser) => {
   return { token };
 };
 
+const userLogin = async (login) => {
+  const { email, password } = login;
+
+  validationsHelper.emailExist(email);
+  validationsHelper.passwordExist(password); 
+  validationsHelper.emailIsEmpty(email);
+  validationsHelper.passwordIsEmpty(password);
+
+  const verifyEmail = await User.findOne({ where: { email } });
+  validationsHelper.issoNonEcziste(verifyEmail);
+  const { dataValues: { displayName } } = verifyEmail;
+
+  const token = generateToken.create(displayName, email);
+  return { token };
+};
+
 module.exports = {
   createUser,
+  userLogin,
 };

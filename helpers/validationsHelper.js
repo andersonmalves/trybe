@@ -11,7 +11,7 @@ const SIX = 6;
 const EIGHT = 8;
 
 const displayNameIsValid = (displayName) => {
-  if (displayName.length < EIGHT) {
+  if (typeof displayName === 'undefined' || displayName.length < EIGHT) {
     throw new CustomError({
       status: STATUS_CODE.BAD_REQUEST,
       message: STATUS_MESSAGE.DISPLAYNAME_IS_INVALID,
@@ -30,10 +30,19 @@ const emailIsValid = (email) => {
 };
 
 const emailExist = (email) => {
-  if (!email) {
+  if (typeof email === 'undefined') {
     throw new CustomError({
       status: STATUS_CODE.BAD_REQUEST,
       message: STATUS_MESSAGE.EMAIL_IS_REQUIRED,
+    });
+  }
+};
+
+const emailIsEmpty = (email) => {
+  if (email === '') {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.EMAIL_IS_EMPTY,
     });
   }
 };
@@ -48,11 +57,19 @@ const passwordIsValid = (password) => {
 };
 
 const passwordExist = (password) => {
-  if (!password || password === null) {
-    console.log(typeof password);
+  if (typeof password === 'undefined') {
     throw new CustomError({
       status: STATUS_CODE.BAD_REQUEST,
       message: STATUS_MESSAGE.PASSWORD_IS_REQUIRED,
+    });
+  }
+};
+
+const passwordIsEmpty = (password) => {
+  if (password === '') {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.PASSWORD_IS_EMPTY,
     });
   }
 };
@@ -66,6 +83,15 @@ const checkIfEmailExist = (verifyEmail) => {
   }
 };
 
+const issoNonEcziste = (verifyEmail) => {
+  if (!verifyEmail) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.INVALID_FIELDS,
+    });
+  }
+};
+
 module.exports = {
   displayNameIsValid,
   emailIsValid,
@@ -73,4 +99,7 @@ module.exports = {
   passwordIsValid,
   passwordExist,
   checkIfEmailExist,
+  emailIsEmpty,
+  passwordIsEmpty,
+  issoNonEcziste,
 };
