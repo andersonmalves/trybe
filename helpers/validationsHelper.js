@@ -92,6 +92,15 @@ const issoNonEcziste = (verifyEmail) => {
   }
 };
 
+const userIdExist = (result) => {
+  if (!result) {
+    throw new CustomError({
+      status: STATUS_CODE.NOT_FOUND,
+      message: STATUS_MESSAGE.USER_NOT_EXIST,
+    });
+  }
+};
+
 module.exports = {
   displayNameIsValid,
   emailIsValid,
@@ -102,4 +111,5 @@ module.exports = {
   emailIsEmpty,
   passwordIsEmpty,
   issoNonEcziste,
+  userIdExist,
 };

@@ -10,6 +10,7 @@ const STATUS_MESSAGE = {
   INVALID_FIELDS: 'Invalid fields',
   MISSING_TOKEN: 'Token not found',
   MALFORMED_TOKEN: 'Expired or invalid token',
+  USER_NOT_EXIST: 'User does not exist',
 };
 
 module.exports = STATUS_MESSAGE;

@@ -23,8 +23,17 @@ const userLogin = async (request, response) => {
 
 const getAllUsers = async (request, response) => {
   try {
-    // console.log(request.headers.authorization);
     const result = await userService.getAllUsers();
+    response.status(STATUS_CODE.SUCCESS).json(result);
+  } catch (error) {
+    response.status(error.status).json({ message: error.message });
+  }
+};
+
+const getUserById = async (request, response) => {
+  try {
+    const { id } = request.params;
+    const result = await userService.getUserById(id);
     response.status(STATUS_CODE.SUCCESS).json(result);
   } catch (error) {
     response.status(error.status).json({ message: error.message });
@@ -35,4 +44,5 @@ module.exports = {
   createUser,
   userLogin,
   getAllUsers,
+  getUserById,
 };
