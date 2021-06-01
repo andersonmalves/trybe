@@ -8,6 +8,8 @@ const STATUS_MESSAGE = {
   EMAIL_IS_EMPTY: '"email" is not allowed to be empty',
   PASSWORD_IS_EMPTY: '"password" is not allowed to be empty',
   INVALID_FIELDS: 'Invalid fields',
+  MISSING_TOKEN: 'Token not found',
+  MALFORMED_TOKEN: 'Expired or invalid token',
 };
 
 module.exports = STATUS_MESSAGE;

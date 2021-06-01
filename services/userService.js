@@ -34,7 +34,13 @@ const userLogin = async (login) => {
   return { token };
 };
 
+const getAllUsers = async () => {
+  const result = await User.findAll();
+  return result;
+};
+
 module.exports = {
   createUser,
   userLogin,
+  getAllUsers,
 };
