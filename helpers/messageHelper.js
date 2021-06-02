@@ -12,6 +12,10 @@ const STATUS_MESSAGE = {
   MALFORMED_TOKEN: 'Expired or invalid token',
   USER_NOT_EXIST: 'User does not exist',
   NAME_IS_REQUIRED: '"name" is required',
+  TITILE_IS_REQUIRED: '"title" is required',
+  CONTENT_IS_REQUIRED: '"content" is required',
+  CATEGORY_IS_REQUIRED: '"categoryIds" is required',
+  CATEGORY_NOT_FOUND: '"categoryIds" not found',
 };
 
 module.exports = STATUS_MESSAGE;

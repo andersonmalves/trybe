@@ -110,6 +110,42 @@ const categoryNameExist = (name) => {
   }
 };
 
+const titleExist = (title) => {
+  if (!title) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.TITILE_IS_REQUIRED,
+    });
+  }
+};
+
+const contentExist = (content) => {
+  if (!content) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.CONTENT_IS_REQUIRED,
+    });
+  }
+};
+
+const categoryExist = (categoryIds) => {
+  if (!categoryIds) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.CATEGORY_IS_REQUIRED,
+    });
+  }
+};
+
+const checkIfCategoryAlreadyExist = (categories, categoryIds) => { // Compara o tamanho de retorno do banco e das categorias enviadas.
+  if (categories.length !== categoryIds.length) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.CATEGORY_NOT_FOUND,
+    });
+  }
+};
+
 module.exports = {
   displayNameIsValid,
   emailIsValid,
@@ -122,4 +158,8 @@ module.exports = {
   issoNonEcziste,
   userIdExist,
   categoryNameExist,
+  titleExist,
+  contentExist,
+  categoryExist,
+  checkIfCategoryAlreadyExist,
 };
