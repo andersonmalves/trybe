@@ -16,7 +16,7 @@ const getAllCategories = async (request, response) => {
     const result = await categoryService.getAllCategories();
     response.status(STATUS_CODE.SUCCESS).json(result);
   } catch (error) {
-    response.status(401).json({ message: error.message });
+    response.status(error.status).json({ message: error.message });
   }
 };
 

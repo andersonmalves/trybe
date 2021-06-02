@@ -7,6 +7,7 @@ const router = express.Router();
 // (_, res) => { res.send('deu bom'); }
 router.post('/categories', authMiddleware.checkIfUserIsAuthenticated,
   categoryController.createCategory);
-router.get('/categories', categoryController.getAllCategories);
+router.get('/categories', authMiddleware.checkIfUserIsAuthenticated,
+  categoryController.getAllCategories);
 
 module.exports = router;
