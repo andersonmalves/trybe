@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-const { userRoutes } = require('./routes');
+const { userRoutes, categoryRoutes } = require('./routes');
 
 app.use(express.json());
 
@@ -13,6 +13,7 @@ app.get('/', (request, response) => {
 });
 
 app.use(userRoutes);
+app.use(categoryRoutes);
 
 app.listen(PORT, () => {
   console.log(`BlogsApi listen on ${PORT}`);

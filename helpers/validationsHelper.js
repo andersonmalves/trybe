@@ -101,6 +101,15 @@ const userIdExist = (result) => {
   }
 };
 
+const categoryNameExist = (name) => {
+  if (!name) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.NAME_IS_REQUIRED,
+    });
+  }
+};
+
 module.exports = {
   displayNameIsValid,
   emailIsValid,
@@ -112,4 +121,5 @@ module.exports = {
   passwordIsEmpty,
   issoNonEcziste,
   userIdExist,
+  categoryNameExist,
 };

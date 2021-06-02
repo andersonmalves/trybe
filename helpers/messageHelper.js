@@ -11,6 +11,7 @@ const STATUS_MESSAGE = {
   MISSING_TOKEN: 'Token not found',
   MALFORMED_TOKEN: 'Expired or invalid token',
   USER_NOT_EXIST: 'User does not exist',
+  NAME_IS_REQUIRED: '"name" is required',
 };
 
 module.exports = STATUS_MESSAGE;
