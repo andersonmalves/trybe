@@ -79,9 +79,19 @@ const updatePost = async (id, post, authorization) => {
   return result;
 };
 
+const deletePost = async (id, authorization) => {
+  const decodedToken = decodeToken.decode(authorization);
+  const result = await User.findOne({ where: { id } }); // { dataValues: { email } }
+  validationsHelper.checkIfPostWasReturned(result);
+  validationsHelper.checkOwnerPost(decodedToken, result.email);
+  await BlogPosts.destroy({ where: { id } });
+  return true;
+};
+
 module.exports = {
   createPost,
   getAllPosts,
   getPostById,
   updatePost,
+  deletePost,
 };

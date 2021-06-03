@@ -9,5 +9,6 @@ router.post('/post', authMiddleware.checkIfUserIsAuthenticated, postController.c
 router.get('/post', authMiddleware.checkIfUserIsAuthenticated, postController.getAllPosts);
 router.get('/post/:id', authMiddleware.checkIfUserIsAuthenticated, postController.getPostById);
 router.put('/post/:id', authMiddleware.checkIfUserIsAuthenticated, postController.updatePost);
+router.delete('/post/:id', authMiddleware.checkIfUserIsAuthenticated, postController.deletePost);
 
 module.exports = router;
