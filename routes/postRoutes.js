@@ -6,5 +6,6 @@ const router = express.Router();
 
 // (_, res) => { res.send('deu bom'); }
 router.post('/post', authMiddleware.checkIfUserIsAuthenticated, postController.createPost);
+router.get('/post', authMiddleware.checkIfUserIsAuthenticated, postController.getAllPosts);
 
 module.exports = router;
