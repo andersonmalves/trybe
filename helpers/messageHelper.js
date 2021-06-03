@@ -17,6 +17,8 @@ const STATUS_MESSAGE = {
   CATEGORY_IS_REQUIRED: '"categoryIds" is required',
   CATEGORY_NOT_FOUND: '"categoryIds" not found',
   POST_NOT_EXIST: 'Post does not exist',
+  CATEGORY_EDIT_OFF: 'Categories cannot be edited',
+  UNAUTHORIZED_USER: 'Unauthorized user',
 };
 
 module.exports = STATUS_MESSAGE;

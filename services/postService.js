@@ -22,7 +22,6 @@ const createPost = async (post, authorization) => {
   // const result = await BlogPosts.findAll();
 
   categoryIds.forEach(async (categoryId) => {
-    console.log(categoryId);
     await PostsCategories.create({ postId: result.id, categoryId });
   });
 
@@ -57,8 +56,26 @@ const getPostById = async (id) => {
       { model: Categories, as: 'categories', through: { attributes: [] } },
     ],
   });
-  console.log(result);
   validationsHelper.checkIfPostWasReturned(result);
+  return result;
+};
+
+const updatePost = async (id, post, authorization) => {
+  const decodedToken = decodeToken.decode(authorization);
+  const { dataValues: { email } } = await User.findOne({ where: { id } });
+  validationsHelper.checkOwnerPost(decodedToken, email);
+  const { title, content, categoryIds } = post;
+  validationsHelper.checkIfExistcategoryIds(categoryIds);
+  validationsHelper.titleExist(title);
+  validationsHelper.contentExist(content);
+  await BlogPosts.update({ title, content }, { where: { id } });
+  const result = await BlogPosts.findOne({
+    where: { id },
+    attributes: { exclude: ['id', 'published', 'published'] },
+    include: [
+      { model: Categories, as: 'categories', through: { attributes: [] } },
+    ],
+  });
   return result;
 };
 
@@ -66,4 +83,5 @@ module.exports = {
   createPost,
   getAllPosts,
   getPostById,
+  updatePost,
 };

@@ -155,6 +155,24 @@ const checkIfPostWasReturned = (post) => {
   }
 };
 
+const checkIfExistcategoryIds = (categoryIds) => {
+  if (categoryIds) {
+    throw new CustomError({
+      status: STATUS_CODE.BAD_REQUEST,
+      message: STATUS_MESSAGE.CATEGORY_EDIT_OFF,
+    });
+  }
+};
+
+const checkOwnerPost = (decodedToken, email) => {
+  if (decodedToken.email !== email) {
+    throw new CustomError({
+      status: STATUS_CODE.UNAUTHORIZED,
+      message: STATUS_MESSAGE.UNAUTHORIZED_USER,
+    });
+  }
+};
+
 module.exports = {
   displayNameIsValid,
   emailIsValid,
@@ -172,4 +190,6 @@ module.exports = {
   categoryExist,
   checkIfCategoryAlreadyExist,
   checkIfPostWasReturned,
+  checkIfExistcategoryIds,
+  checkOwnerPost,
 };
