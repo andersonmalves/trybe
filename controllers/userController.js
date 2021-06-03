@@ -40,9 +40,20 @@ const getUserById = async (request, response) => {
   }
 };
 
+const deleteUser = async (request, response) => {
+  try {
+    const { authorization } = request.headers;
+    await userService.deleteUser(authorization);
+    response.status(STATUS_CODE.NO_CONTENT).send();
+  } catch (error) {
+    response.status(error.status).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createUser,
   userLogin,
   getAllUsers,
   getUserById,
+  deleteUser,
 };
