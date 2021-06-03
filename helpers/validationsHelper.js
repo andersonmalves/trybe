@@ -146,6 +146,15 @@ const checkIfCategoryAlreadyExist = (categories, categoryIds) => { // Compara o 
   }
 };
 
+const checkIfPostWasReturned = (post) => {
+  if (!post) {
+    throw new CustomError({
+      status: STATUS_CODE.NOT_FOUND,
+      message: STATUS_MESSAGE.POST_NOT_EXIST,
+    });
+  }
+};
+
 module.exports = {
   displayNameIsValid,
   emailIsValid,
@@ -162,4 +171,5 @@ module.exports = {
   contentExist,
   categoryExist,
   checkIfCategoryAlreadyExist,
+  checkIfPostWasReturned,
 };
