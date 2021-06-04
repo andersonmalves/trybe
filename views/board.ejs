@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>ChatRoom</title>
+  <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>ChatRoom</h1>
+  <h2>Alterar apelido</h2>
+  <input data-testid="nickname-box" type="text" id="textNickname" >
+  <button id="sendNickname" data-testid="nickname-button">
+    Salvar
+  </button>
+  
+  <h2>Usuários online</h2>
+  <ul id="userList"></ul>
+  
+  <h2>Chat</h2>
+  <ul id='chatMessage'></ul>
+  
+  <input data-testid="message-box" type="text" id="textMessage" >
+  <button type="button" id="sendMessage" data-testid="send-button">
+    Enviar
+  </button>
+  
+  <script>
+    const socket = io();
+  </script>
+</body>
+</html>
