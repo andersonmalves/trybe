@@ -39,14 +39,14 @@ io.on('connection', (client) => {
   });
 
   client.on('newUserOnline', (user) => {
-    onlineUsers.unshift({ id: client.id, nickname: user });
+    onlineUsers.push({ id: client.id, nickname: user });
     io.emit('onlineUsers', onlineUsers);
   });
 
   client.on('changeNickname', (newNickname) => {
     const index = onlineUsers.findIndex((element) => element.id === client.id);
     if (index !== -1) onlineUsers.splice(index, 1);
-    onlineUsers.unshift({ id: client.id, nickname: newNickname });
+    onlineUsers.push({ id: client.id, nickname: newNickname });
     io.emit('onlineUsers', onlineUsers);
   });
 

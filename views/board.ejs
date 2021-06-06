@@ -62,16 +62,18 @@
 
     socket.on('onlineUsers', (onlineUsers) => {
       userList.innerHTML = '';
-      onlineUsers.forEach((element) => {
+      const activeUser = onlineUsers.find((element) => element.id === socket.id);
+      const filteredList = onlineUsers.filter((element) => element.id !== socket.id);
+      filteredList.unshift(activeUser);  
+      filteredList.forEach((element) => {
         const li = document.createElement('li');
+        li.setAttribute("data-testid", "online-user");
         if (element.id === socket.id) {
-          sessionStorage.setItem('nickname', element.nickname);
-          li.setAttribute("data-testid", "online-user");
+          sessionStorage.setItem('nickname', element.nickname); 
         }
         li.innerText = element.nickname;
         userList.appendChild(li);
       });
-      // console.log(onlineUsers);
     });
 
     socket.emit('newUserOnline', randomNickname);
