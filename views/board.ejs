@@ -16,7 +16,13 @@
   <ul id="userList"></ul>
   
   <h2>Chat</h2>
-  <ul id='chatMessage'></ul>
+  <ul id='chatMessage'>
+    <% history.forEach(( element ) => { %> <!-- Source: https://github.com/tryber/sd-07-project-webchat/blob/rafaelmguimaraes-webchat-project/views/index.ejs -->
+      <li data-testid="message">
+        <%= element.timestamp %> - <%= element.nickname %>: <%= element.message %>
+      </li>
+    <% }) %>
+  </ul>
   
   <input data-testid="message-box" type="text" id="textMessage" >
   <button type="button" id="sendMessage" data-testid="send-button">
@@ -65,7 +71,7 @@
         li.innerText = element.nickname;
         userList.appendChild(li);
       });
-      console.log(onlineUsers);
+      // console.log(onlineUsers);
     });
 
     socket.emit('newUserOnline', randomNickname);

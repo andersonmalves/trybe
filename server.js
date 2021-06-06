@@ -12,6 +12,7 @@ const io = require('socket.io')(http, {
   },
 });
 
+const { chatModel } = require('./models');
 const { message } = require('./helpers');
 
 instrument(io, { auth: false });
@@ -21,8 +22,11 @@ app.set('view engine', 'ejs');
 app.set('views', './views');
 app.use(cors());
 
-app.get('/', (_, response) => {
-  response.render('board');
+chatModel.clearMessages();
+
+app.get('/', async (_, response) => {
+  const history = await chatModel.getAllMessages();
+  response.render('board', { history });
 });
 
 const onlineUsers = [];
