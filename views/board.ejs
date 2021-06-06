@@ -25,6 +25,51 @@
   
   <script>
     const socket = io();
+    const sendMessage = document.querySelector('#sendMessage');
+    const textMessage = document.querySelector('#textMessage');
+    const chatMessage = document.querySelector('#chatMessage');
+    const textNickname = document.querySelector('#textNickname');
+    const sendNickname = document.querySelector('#sendNickname');
+    const userList = document.querySelector('#userList');
+
+    const randomNickname = `User-${Math.random().toString(20).substr(2, 11)}`;
+
+    sendMessage.addEventListener('click', () =>{
+      const user = sessionStorage.getItem('nickname'); 
+      socket.emit('message', { nickname: user, chatMessage: textMessage.value });
+      textMessage.value = ''
+      return false;
+    });
+
+    sendNickname.addEventListener('click', () =>{
+      socket.emit('changeNickname', textNickname.value);
+      textNickname.value = ''
+      return false;
+    });
+
+    socket.on('message', (message) => {
+      const li = document.createElement('li');
+      li.setAttribute("data-testid", "message");
+      li.innerText = message;
+      chatMessage.appendChild(li)
+    });
+
+    socket.on('onlineUsers', (onlineUsers) => {
+      userList.innerHTML = '';
+      onlineUsers.forEach((element) => {
+        const li = document.createElement('li');
+        if (element.id === socket.id) {
+          sessionStorage.setItem('nickname', element.nickname);
+          li.setAttribute("data-testid", "online-user");
+        }
+        li.innerText = element.nickname;
+        userList.appendChild(li);
+      });
+      console.log(onlineUsers);
+    });
+
+    socket.emit('newUserOnline', randomNickname);
+
   </script>
 </body>
 </html>

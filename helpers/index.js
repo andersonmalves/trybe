@@ -1,5 +1,5 @@
-const generateMessage = require('./generateMessage');
+const message = require('./message');
 
 module.exports = {
-  generateMessage,
+  message,
 };

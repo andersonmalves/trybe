@@ -12,7 +12,7 @@ const io = require('socket.io')(http, {
   },
 });
 
-const { generateMessage } = require('./helpers');
+const { message } = require('./helpers');
 
 instrument(io, { auth: false });
 const PORT = process.env.PORT || 3000;
@@ -25,15 +25,32 @@ app.get('/', (_, response) => {
   response.render('board');
 });
 
+const onlineUsers = [];
+
 io.on('connection', (client) => {
-  console.log(`Novo usuário conectado ${client.id}`);
+  // console.log(`Novo usuário conectado ${client.id}`);
 
   client.on('message', ({ nickname, chatMessage }) => {
-    io.emit('message', generateMessage.create(nickname, chatMessage));
+    io.emit('message', message.create(nickname, chatMessage));
+  });
+
+  client.on('newUserOnline', (user) => {
+    onlineUsers.unshift({ id: client.id, nickname: user });
+    io.emit('onlineUsers', onlineUsers);
+  });
+
+  client.on('changeNickname', (newNickname) => {
+    const index = onlineUsers.findIndex((element) => element.id === client.id);
+    if (index !== -1) onlineUsers.splice(index, 1);
+    onlineUsers.unshift({ id: client.id, nickname: newNickname });
+    io.emit('onlineUsers', onlineUsers);
   });
 
   client.on('disconnect', () => {
-    console.log(`${client.id} saiu do chat`);
+    const index = onlineUsers.findIndex((element) => element.id === client.id);
+    if (index !== -1) onlineUsers.splice(index, 1);
+    io.emit('onlineUsers', onlineUsers);
+    // console.log(`${client.id} saiu do chat`);
   });
 });
 
