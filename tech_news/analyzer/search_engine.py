@@ -46,7 +46,10 @@ def search_by_source(source):
 
 # Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    all_news = find_news()
+    result = []
 
-
-# search_by_source("ResetEra")
+    for news in all_news:
+        if category.lower() in map(str.lower, news['categories']):
+            result.append((news['title'], news['url']))
+    return result
