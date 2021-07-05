@@ -35,13 +35,18 @@ def search_by_date(date):
 
 # Requisito 8
 def search_by_source(source):
-    """Seu código deve vir aqui"""
+    all_news = find_news()
+    result = []
+
+    for news in all_news:
+        if source.lower() in map(str.lower, news['sources']):
+            result.append((news['title'], news['url']))
+    return result
 
 
 # Requisito 9
 def search_by_category(category):
     """Seu código deve vir aqui"""
 
-# search_by_title("Musk")
-# search_by_date("2021-07-04")
-#  "2021-07-04T20:00:01",
+
+# search_by_source("ResetEra")
