@@ -11,10 +11,6 @@ class Importer(ABC):
         self.filepath = filepath
 
     @abstractmethod
-    def transform_data(self, file_reader):
-        raise NotImplementedError
-
-    @abstractmethod
     def de_serialize(self):
         raise NotImplementedError
 
@@ -22,24 +18,7 @@ class Importer(ABC):
 class TransformDataCSV(Importer):
     def de_serialize(self):
         with open(self.filepath) as file:
-            csv_reader = csv.reader(file, delimiter=",", quotechar='"')
-            _, *data = csv_reader
-
-            return data
-
-    def transform_data(self, file_reader):
-        list_file = []
-        for row in file_reader:
-            obj = {
-                "id": int(row[0]),
-                "nome_do_produto": row[1],
-                "nome_da_empresa": row[2],
-                "data_de_fabricacao": row[3],
-                "data_de_validade": row[4],
-                "numero_de_serie": row[5],
-            }
-            list_file.append(obj)
-        return list_file
+            return [row for row in csv.DictReader(file)]
 
 
 class TransformDataJSON(Importer):
@@ -47,17 +26,8 @@ class TransformDataJSON(Importer):
         with open(self.filepath) as file:
             return json.load(file)
 
-    def transform_data(self, file_reader):
-        list_file = []
-        return list_file
-
 
 class TransformDataXML(Importer):
-    def de_serialize(self):
-        tree = ET.parse(self.filepath)
-        root = tree.getroot()
-        return root
-
     def transform_data(self, file_reader):
         list_file = []
         for child in file_reader:
@@ -72,6 +42,12 @@ class TransformDataXML(Importer):
             list_file.append(obj)
         return list_file
 
+    def de_serialize(self):
+        tree = ET.parse(self.filepath)
+        root = tree.getroot()
+        result = self.transform_data(root)
+        return result
+
 
 class Inventory:
     @classmethod
@@ -79,17 +55,13 @@ class Inventory:
         dictionary = ""
 
         if ".csv" in export_file:
-            obj_csv = TransformDataCSV(export_file)
-            csv_report = obj_csv.de_serialize()
-            dictionary = obj_csv.transform_data(csv_report)
+            dictionary = TransformDataCSV(export_file).de_serialize()
+
         elif ".json" in export_file:
-            content_json = TransformDataJSON(export_file)
-            dictionary = content_json.de_serialize()
+            dictionary = TransformDataJSON(export_file).de_serialize()
 
         elif ".xml" in export_file:
-            content_xml = TransformDataXML(export_file)
-            xml_report = content_xml.de_serialize()
-            dictionary = content_xml.transform_data(xml_report)
+            dictionary = TransformDataXML(export_file).de_serialize()
 
         if type_report == "completo":
             return CompleteReport.generate(dictionary)
