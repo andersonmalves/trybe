@@ -45,7 +45,7 @@ class TrackOrders:
 
         for row in self.pedidos:
             g.append(row["c"])
-        
+
         return collections.Counter(g).most_common(1)[0][0]
 
     def get_least_busy_day(self):
@@ -53,15 +53,5 @@ class TrackOrders:
 
         for row in self.pedidos:
             h.append(row["c"])
-        
+
         return collections.Counter(h).most_common()[-1][0]
-
-
-
-track_orders = TrackOrders()
-track_orders.add_new_order("jorge", "frango", "domingo")
-track_orders.add_new_order("maria", "hamburguer", "terca-feira")
-track_orders.add_new_order("arnaldo", "misto-quente", "terca-feira")
-
-most_ordered = track_orders.get_most_ordered_dish_per_costumer("maria")
-print(most_ordered)
