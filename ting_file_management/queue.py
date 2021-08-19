@@ -1,3 +1,4 @@
+# from deque import Deque
 class Queue:
     def __init__(self):
         self.fila = []
