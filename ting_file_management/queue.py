@@ -1,27 +1,28 @@
 # from deque import Deque
 class Queue:
     def __init__(self):
-        self.fila = []
+        # Orientado por Túlio sobre o uso de atributos privados <3
+        self.__fila = []
 
     def __len__(self):
-        return len(self.fila)
+        return len(self.__fila)
 
     def enqueue(self, value):
-        self.fila.append(value)
+        self.__fila.append(value)
 
     def dequeue(self):
-        if self.fila:
-            return self.fila.pop(0)
+        if self.__fila:
+            return self.__fila.pop(0)
         return None
 
     def search(self, index):
-        if 0 <= index < len(self.fila):
-            return self.fila[index]
+        if 0 <= index < len(self.__fila):
+            return self.__fila[index]
         else:
             raise IndexError
 
     def __str__(self):
-        return "Deque(" + ", ".join(map(lambda x: str(x), self.fila)) + ")"
+        return "Deque(" + ", ".join(map(lambda x: str(x), self.__fila)) + ")"
 
 
 if __name__ == "__main__":
