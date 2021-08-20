@@ -4,18 +4,22 @@
 
 def exists_word(word, instance):
     lines = []
+    linha_atual = 0
     for index in range(instance.__len__()):
         result = instance.search(index)["linhas_do_arquivo"]
-        if result == []:
-            return lines
-        else:
-            for line in result:
-                lines.append(line.lower().find(word.lower()))
-            return [{
-                        "palavra": word,
-                        "arquivo": instance.search(index)["nome_do_arquivo"],
-                        "ocorrencias": [{"linha": len(lines)}],
-                    }]
+
+        for line in result:
+            line = line.lower().find(word.lower())
+            if line >= 0:
+                linha_atual += 1
+                lines.append(line)
+            else:
+                return lines
+        return [{
+                    "palavra": word,
+                    "arquivo": instance.search(index)["nome_do_arquivo"],
+                    "ocorrencias": [{"linha": linha_atual}],
+                }]
 
 
 def search_by_word(word, instance):
