@@ -34,5 +34,3 @@ if __name__ == "__main__":
 
     for elem in elements_2:
         queue.enqueue(elem)
-
-    print(queue)
