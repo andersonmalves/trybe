@@ -23,7 +23,23 @@ def exists_word(word, instance):
 
 
 def search_by_word(word, instance):
-    pass
+    lines = []
+    linha_atual = 0
+    for index in range(instance.__len__()):
+        result = instance.search(index)["linhas_do_arquivo"]
+
+        for line in result:
+            xablau = line.lower().find(word.lower())
+            if xablau >= 0:
+                linha_atual += 1
+                lines.append(xablau)
+            else:
+                return lines
+        return [{
+                    "palavra": word,
+                    "arquivo": instance.search(index)["nome_do_arquivo"],
+                    "ocorrencias": [{"linha": linha_atual, "conteudo": line}],
+                }]
 
 
 # if __name__ == "__main__":
