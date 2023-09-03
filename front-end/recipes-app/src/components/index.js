@@ -1,0 +1,12 @@
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as RecipeCardList } from './RecipeCardList';
+export { default as RecipeAreaFilter } from './RecipeAreaFilter';
+export { default as RecipeCategoryFilter } from './RecipeCategoryFilter';
+export { default as RecipeFilter } from './RecipeFilter';
+export { default as FavoriteButton } from './FavoriteButton';
+export { default as ShareButton } from './ShareButton';
+export { default as Recomendation } from './Recomendation';
+export { default as RecipeButton } from './RecipeButton';
+export { default as RecipeIngredients } from './RecipeIngredients';
+export { default as RecipeDoneFavCard } from './RecipeDoneFavCard';
