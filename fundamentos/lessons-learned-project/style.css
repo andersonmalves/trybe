@@ -1,0 +1,84 @@
+* {
+/*
+  margin: 0;
+  padding: 0;
+  border: 0;
+*/
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background-color: rgb(253, 251, 251);
+  padding-top: 130px; /* espaçamento do tamanho do header */
+}
+
+header {
+  background-color: rgb(0, 127, 0);
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+h1 {
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: Open Sans;
+}
+
+nav a{
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+nav li{
+  list-style: none;
+}
+
+#foto {
+  margin: 20px;
+}
+
+#minha_foto {
+  max-width: 200px;
+  border-radius: 5%;
+  padding-left: 5px;
+}
+
+#listas {
+  margin-top: 50px;
+  padding-left: 25px;
+}
+
+.lado-esquerdo {
+  float: left;
+  width: 40%;
+  border-width: thin;
+  border-style: dashed;
+  padding-left: 5px;
+}
+
+.lado-direito {
+  float: right;
+  width: 40%;
+  border-width: thin;
+  border-style: dashed;
+  padding-left: 5px;
+}
+
+.texto-artigo {
+  font-size: 18px;
+}
+
+.texto-aside {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#rodape {
+/*  position: absolute; */
+  clear: both;
+  bottom: 0;
+  width: 100%;
+}
