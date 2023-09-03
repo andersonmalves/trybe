@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+div {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  border: 1px solid black;
+}
+
+table {
+  border-collapse: collapse;
+  margin: 10px;
+}
+
+td {
+  height: 41px;
+  width: 40px;
+  border: 1px solid black;
+}
+
+#color-palette {
+  margin: 10px;
+  display: table;
+  clear: both;
+}
+
+#options {
+  margin: 10px;
+}
+
+.color {
+  height: 41px;
+  width: 40px;
+  margin: 0px 2px;
+  float: left;
+  border: 1px solid #000;
+}
+
+.pixel {
+  height: 41px;
+  width: 40px;
+  cursor: pointer;
+  border: 1px solid #000;
+  background-color: white;
+} 
